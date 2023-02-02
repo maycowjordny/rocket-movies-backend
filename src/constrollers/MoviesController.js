@@ -5,7 +5,7 @@ class MoviesController {
         const { title, rating, description, tags } = request.body
         const { user_id } = request.params
 
-        const movie_id = await knex("movies").insert({
+        const movie = await knex("movies").insert({
             title,
             'rating': rating != null ? rating : 0,
             description,
@@ -14,7 +14,7 @@ class MoviesController {
 
         const tagsInsert = tags.map(name => {
             return {
-                movie_id,
+                "movie_id": movie[0],
                 name,
                 user_id
             }
