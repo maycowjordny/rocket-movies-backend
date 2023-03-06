@@ -10,20 +10,11 @@ const usersRoutes = Router()
 
 const upload = multer(uploadConfig.MULTER)
 
-function myMiddleware(request, response, next) {
-
-    next()
-}
-
-
-
-
 
 const usersController = new UsersController()
 const userAvatarController = new UserAvatarController()
 
-
-usersRoutes.post("/", myMiddleware, usersController.create)
+usersRoutes.post("/", usersController.create)
 usersRoutes.put("/", ensureAuthenticated, usersController.update)
 usersRoutes.patch("/avatar", ensureAuthenticated, upload.single("avatar"), userAvatarController.update)
 
