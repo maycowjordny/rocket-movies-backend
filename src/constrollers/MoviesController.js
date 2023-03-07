@@ -28,7 +28,8 @@ class MoviesController {
 
     async show(request, response) {
         const { id } = request.params
-        const movie = await knex("movies").where({ id }).first()
+        const user_id = request.user.id;
+        const movie = await knex("movies").where({ id }).where({ user_id }).first()
         const tags = await knex("tags").where({ movie_id: id }).orderBy("name")
 
         return response.json({
@@ -60,7 +61,7 @@ class MoviesController {
                 .select([
                     "movies.id",
                     "movies.title",
-                    "movies.user_id"
+                    "movies.user_id",
                 ])
                 .where("movies.user_id", user_id)
                 .whereLike("movies.title", `%${title}%`)
