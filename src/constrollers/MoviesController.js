@@ -40,11 +40,12 @@ class MoviesController {
     }
 
     async delete(request, response) {
-        const { id } = request.params
+        const { id } = request.params;
+        const user_id = request.user.id;
 
-        await knex("movies").where({ id }).delete()
+        await knex("movies").where({ id }).where({ user_id }).delete();
 
-        return response.json()
+        return response.json();
     }
 
     async index(request, response) {
