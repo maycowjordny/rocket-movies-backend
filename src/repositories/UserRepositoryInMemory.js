@@ -1,6 +1,5 @@
-const { use } = require("express/lib/router")
 
-class UserReposiroyInMemory {
+class UserRepositoryInMemory {
     users = []
 
     async create({ email, name, password }) {
@@ -23,4 +22,4 @@ class UserReposiroyInMemory {
     }
 }
 
-module.exports = UserReposiroyInMemory
+module.exports = UserRepositoryInMemory
